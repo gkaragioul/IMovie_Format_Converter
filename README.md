@@ -1,95 +1,88 @@
 # VideoConverterOsx
 
-A native macOS batch converter app that converts dragged-and-dropped media into an iMovie-friendly format.
+> **This project is no longer maintained.** It was a personal tool that served its purpose and is now archived as open source under the MIT license. No further updates, bug fixes, or support will be provided. That said, the app works — feel free to build it yourself and use it as-is.
 
-The app is built with SwiftUI and a conversion core around `ffmpeg`, with progress tracking for both per-file and overall batch status.
+A native macOS batch converter app that converts dragged-and-dropped media into an iMovie-friendly format (H.264 + AAC in a `.mov` container). Built with SwiftUI and powered by `ffmpeg`.
 
-## Why this format
+## Building a working app from source
 
-The converter targets a profile that imports reliably into iMovie:
+### Prerequisites
 
-- Container: `QuickTime MOV` (`.mov`)
-- Video: `H.264` (`libx264`, `yuv420p`, profile `high`, level `4.1`)
-- Audio: `AAC` stereo at `192k`
-- Streaming-friendly atom placement: `+faststart`
-
-Output files are named as `<original>_imovie.mov` (with numeric suffixes on collision).
-
-## Features
-
-- Drag and drop one or many video files
-- Drag and drop folders (recursive scan for supported media)
-- Batch queue with per-item status (`Pending`, `Converting`, `Done`, `Failed`)
-- Per-item progress bars and overall progress bar
-- Export path picker
-- Cancel in-progress conversion
-- Built-in app icon generation and bundling
-- One-command export to a desktop `.app` bundle
-
-## Supported input extensions
-
-`3gp`, `avi`, `m2ts`, `m4v`, `mkv`, `mov`, `mp4`, `mpeg`, `mpg`, `mts`, `mxf`, `ts`, `vob`, `webm`, `wmv`
-
-## Project layout
-
-- `Sources/VideoConverterOsxApp/VideoConverterOsxApp.swift`: macOS SwiftUI app and UI logic
-- `Sources/VideoConverterCore/ConversionEngine.swift`: ffmpeg/ffprobe integration and progress parsing
-- `Tests/VideoConverterCoreTests/ConversionEngineTests.swift`: parser tests + ffmpeg integration test
-- `scripts/build_icon.sh`: generates `.icns` from scripted artwork
-- `scripts/export_app.sh`: builds release binary and exports `.app` to Desktop
-- `Assets/AppIcon.icns`: dock icon used by the exported app bundle
-
-## Requirements
-
-- macOS 13+
-- Swift 5.10+ toolchain
-- `ffmpeg` + `ffprobe` on PATH (or bundled in app resources)
-
-Install ffmpeg on Apple Silicon:
+- A Mac running **macOS 13+**
+- **Xcode Command Line Tools** (or full Xcode) with Swift 5.10+
+- **ffmpeg** and **ffprobe** installed via Homebrew
 
 ```bash
+# Install Xcode Command Line Tools (if not already installed)
+xcode-select --install
+
+# Install ffmpeg
 brew install ffmpeg
 ```
 
-## Build and test
+### Option 1: Export as a desktop .app bundle (recommended)
+
+This builds a release binary and creates a standalone `VideoConverterOsx.app` on your Desktop, with `ffmpeg` and `ffprobe` bundled inside:
 
 ```bash
-swift build
-swift test
-```
-
-## Run in development
-
-```bash
-swift run VideoConverterOsxApp
-```
-
-## Export desktop app bundle
-
-```bash
+git clone https://github.com/georgekgr12/VideoConverterOsx.git
+cd VideoConverterOsx
+chmod +x scripts/export_app.sh scripts/build_icon.sh
 ./scripts/export_app.sh
 ```
 
-Default export location:
+The app will appear at `~/Desktop/VideoConverterOsx.app`. Double-click to launch.
 
-- `/Users/<your-user>/Desktop/VideoConverterOsx.app`
+### Option 2: Run directly from source
 
-The export script bundles `ffmpeg` and `ffprobe` into app resources when they are available.
+```bash
+git clone https://github.com/georgekgr12/VideoConverterOsx.git
+cd VideoConverterOsx
+swift run VideoConverterOsxApp
+```
 
-## Using the app
+This requires `ffmpeg` and `ffprobe` to be on your PATH.
 
-1. Launch `VideoConverterOsx.app`.
-2. Click `Select Media` or drag files/folders into the drop zone.
-3. Click `Set Export Path` and choose your output folder.
-4. Click `Convert`.
-5. Wait for queue completion and review any failed rows.
+## How to use the app
 
-## Error handling behavior
+1. Launch `VideoConverterOsx.app`
+2. Click **Select Media** or drag files/folders into the drop zone
+3. Click **Set Export Path** and choose your output folder
+4. Click **Convert**
+5. Wait for the queue to finish — failed items are shown inline
 
-- Missing input files are marked failed without crashing the app.
-- Conversion failures are isolated per item; remaining queue continues.
-- If duration probing fails, conversion still proceeds (progress granularity may reduce).
+Output files are named `<original>_imovie.mov`.
 
-## Version
+## What it converts to
 
-Current release target: `v1.0`
+| Setting | Value |
+|---------|-------|
+| Container | QuickTime MOV (`.mov`) |
+| Video | H.264 (`libx264`, `yuv420p`, profile high, level 4.1) |
+| Audio | AAC stereo at 192k |
+| Atom placement | `+faststart` (streaming-friendly) |
+
+## Supported input formats
+
+`3gp`, `avi`, `m2ts`, `m4v`, `mkv`, `mov`, `mp4`, `mpeg`, `mpg`, `mts`, `mxf`, `ts`, `vob`, `webm`, `wmv`
+
+## Features
+
+- Drag and drop files or entire folders (recursive scan)
+- Batch queue with per-item status and progress bars
+- Overall progress tracking
+- Export path picker
+- Cancel in-progress conversions
+- Conversion failures are isolated per item; the rest of the queue continues
+
+## Project structure
+
+- `Sources/VideoConverterOsxApp/` — SwiftUI app and UI logic
+- `Sources/VideoConverterCore/` — ffmpeg/ffprobe integration and progress parsing
+- `Tests/VideoConverterCoreTests/` — unit and integration tests
+- `scripts/export_app.sh` — builds and exports the `.app` bundle
+- `scripts/build_icon.sh` — generates the app icon
+
+## License
+
+[MIT](LICENSE)
