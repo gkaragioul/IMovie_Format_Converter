@@ -8,6 +8,7 @@ PRODUCT_EXECUTABLE="VideoConverterOsxApp"
 DESKTOP_APP="$HOME/Desktop/${APP_NAME}.app"
 BUILD_DIR="$ROOT_DIR/.build/release"
 ICON_FILE="$ROOT_DIR/Assets/AppIcon.icns"
+RESOURCES_DIR="$DESKTOP_APP/Contents/Resources"
 
 cd "$ROOT_DIR"
 
@@ -19,22 +20,28 @@ swift build -c release --product "$PRODUCT_EXECUTABLE"
 
 rm -rf "$DESKTOP_APP"
 mkdir -p "$DESKTOP_APP/Contents/MacOS"
-mkdir -p "$DESKTOP_APP/Contents/Resources"
+mkdir -p "$RESOURCES_DIR"
 
 cp -f "$BUILD_DIR/$PRODUCT_EXECUTABLE" "$DESKTOP_APP/Contents/MacOS/$EXECUTABLE_NAME"
 chmod +x "$DESKTOP_APP/Contents/MacOS/$EXECUTABLE_NAME"
 
 if command -v ffmpeg >/dev/null 2>&1; then
-  cp -f "$(command -v ffmpeg)" "$DESKTOP_APP/Contents/Resources/ffmpeg"
-  chmod +x "$DESKTOP_APP/Contents/Resources/ffmpeg"
+  FFMPEG_PATH="$(command -v ffmpeg)"
+  cp -f "$FFMPEG_PATH" "$RESOURCES_DIR/ffmpeg"
+  chmod +x "$RESOURCES_DIR/ffmpeg"
+  "$FFMPEG_PATH" -L > "$RESOURCES_DIR/FFmpeg-LICENSE.txt" 2>/dev/null || true
+  "$FFMPEG_PATH" -version > "$RESOURCES_DIR/FFmpeg-BUILD-CONFIG.txt" 2>/dev/null || true
 fi
 
 if command -v ffprobe >/dev/null 2>&1; then
-  cp -f "$(command -v ffprobe)" "$DESKTOP_APP/Contents/Resources/ffprobe"
-  chmod +x "$DESKTOP_APP/Contents/Resources/ffprobe"
+  FFPROBE_PATH="$(command -v ffprobe)"
+  cp -f "$FFPROBE_PATH" "$RESOURCES_DIR/ffprobe"
+  chmod +x "$RESOURCES_DIR/ffprobe"
 fi
 
-cp -f "$ICON_FILE" "$DESKTOP_APP/Contents/Resources/AppIcon.icns"
+cp -f "$ICON_FILE" "$RESOURCES_DIR/AppIcon.icns"
+cp -f "$ROOT_DIR/LICENSE" "$RESOURCES_DIR/LICENSE.txt"
+cp -f "$ROOT_DIR/THIRD_PARTY_NOTICES.md" "$RESOURCES_DIR/THIRD_PARTY_NOTICES.md"
 
 cat > "$DESKTOP_APP/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -64,7 +71,7 @@ cat > "$DESKTOP_APP/Contents/Info.plist" <<PLIST
   <key>LSMinimumSystemVersion</key>
   <string>13.0</string>
   <key>NSHumanReadableCopyright</key>
-  <string>Copyright © 2026</string>
+  <string>Copyright (c) 2026 georgekgr12</string>
   <key>NSPrincipalClass</key>
   <string>NSApplication</string>
 </dict>
