@@ -1,0 +1,4 @@
+.gitattributes text eol=lf
+*.md text eol=lf
+*.swift text eol=lf
+*.sh text eol=lf
