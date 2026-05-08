@@ -2,7 +2,7 @@
   <img src="Assets/AppIcon-1024.png" alt="VideoConverterOsx app icon" width="180">
 </p>
 
-<h1 align="center">VideoConverterOsx</h1>
+<h1 align="center">iMovie Format Converter</h1>
 
 <p align="center">
   <strong>Native macOS batch conversion for iMovie-ready MOV files.</strong><br>
