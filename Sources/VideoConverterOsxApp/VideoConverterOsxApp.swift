@@ -382,7 +382,7 @@ struct VideoConverterOsxApp: App {
         .defaultSize(width: 940, height: 700)
         .commands {
             CommandGroup(replacing: .appInfo) {
-                Button("About VideoConverterOsx") {
+                Button("About iMovie Format Converter") {
                     showAboutPanel()
                 }
             }
@@ -394,15 +394,15 @@ struct VideoConverterOsxApp: App {
         let credits = """
         MIT License
 
-        VideoConverterOsx is open source under the MIT License.
+        iMovie Format Converter is open source under the MIT License.
 
         Media conversion is powered by ffmpeg/ffprobe when available. Those third-party binaries retain their own license terms. See THIRD_PARTY_NOTICES.md in the repository or app bundle resources for details.
         """
 
         NSApplication.shared.orderFrontStandardAboutPanel(options: [
-            .applicationName: "VideoConverterOsx",
+            .applicationName: "iMovie Format Converter",
             .applicationVersion: "1.0",
-            .copyright: "Copyright (c) 2026 georgekgr12",
+            NSApplication.AboutPanelOptionKey(rawValue: "Copyright"): "Copyright (c) 2026 georgekgr12",
             .credits: NSAttributedString(string: credits)
         ])
     }
