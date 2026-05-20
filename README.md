@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Assets/AppIcon-1024.png" alt="VideoConverterOsx app icon" width="180">
+  <img src="Assets/AppIcon-1024.png" alt="iMovie Format Converter app icon" width="180">
 </p>
 
 <h1 align="center">iMovie Format Converter</h1>
@@ -10,6 +10,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/georgekgr12/IMovie_Format_Converter/releases/latest/download/iMovie-Format-Converter.app.zip">Download</a> &bull;
   <a href="#building-a-working-app-from-source">Build</a> &bull;
   <a href="#how-to-use-the-app">Usage</a> &bull;
   <a href="#features">Features</a> &bull;
@@ -21,6 +22,12 @@
 > **This project is no longer maintained.** It was a personal tool that served its purpose and is now archived as open source under the MIT license. No further updates, bug fixes, or support will be provided. That said, the app works - feel free to build it yourself and use it as-is.
 
 A native macOS batch converter app that converts dragged-and-dropped media into an iMovie-friendly format (H.264 + AAC in a `.mov` container). Built with SwiftUI and powered by `ffmpeg`.
+
+## Download
+
+Download the latest macOS app here:
+
+<https://github.com/georgekgr12/IMovie_Format_Converter/releases/latest/download/iMovie-Format-Converter.app.zip>
 
 ## Building a working app from source
 
@@ -40,23 +47,23 @@ brew install ffmpeg
 
 ### Option 1: Export as a desktop .app bundle (recommended)
 
-This builds a release binary and creates a standalone `VideoConverterOsx.app` on your Desktop, with `ffmpeg` and `ffprobe` bundled inside when they are available on your machine:
+This builds a release binary and creates a standalone `iMovie Format Converter.app` on your Desktop, with `ffmpeg` and `ffprobe` bundled inside when they are available on your machine:
 
 ```bash
-git clone https://github.com/karagioules/OSX_iMovie-Video-File-Converter.git
-cd OSX_iMovie-Video-File-Converter
+git clone https://github.com/georgekgr12/IMovie_Format_Converter.git
+cd IMovie_Format_Converter
 chmod +x scripts/export_app.sh scripts/build_icon.sh
 ./scripts/export_app.sh
 ```
 
-The app will appear at `~/Desktop/VideoConverterOsx.app`. Double-click to launch.
+The app will appear at `~/Desktop/iMovie Format Converter.app`. Double-click to launch.
 The export script copies the MIT license, third-party notices, and ffmpeg license/build information into the app bundle resources when ffmpeg is available.
 
 ### Option 2: Run directly from source
 
 ```bash
-git clone https://github.com/karagioules/OSX_iMovie-Video-File-Converter.git
-cd OSX_iMovie-Video-File-Converter
+git clone https://github.com/georgekgr12/IMovie_Format_Converter.git
+cd IMovie_Format_Converter
 swift run VideoConverterOsxApp
 ```
 
@@ -64,7 +71,7 @@ This requires `ffmpeg` and `ffprobe` to be on your PATH.
 
 ## How to use the app
 
-1. Launch `VideoConverterOsx.app`
+1. Launch `iMovie Format Converter.app`
 2. Click **Select Media** or drag files/folders into the drop zone
 3. Click **Set Export Path** and choose your output folder
 4. Click **Convert**
@@ -104,7 +111,7 @@ Output files are named `<original>_imovie.mov`.
 
 ## License and third-party notices
 
-VideoConverterOsx is released under the [MIT License](LICENSE).
+iMovie Format Converter is released under the [MIT License](LICENSE).
 
 This project does not vendor ffmpeg in source control. The export script can copy locally installed `ffmpeg` and `ffprobe` binaries into the exported `.app` bundle. ffmpeg is a third-party project with its own license terms, typically LGPL-2.1+ or GPL depending on how the binary was built. If you redistribute an exported app bundle, preserve the files generated under `Contents/Resources/` and verify the bundled ffmpeg build's obligations with:
 

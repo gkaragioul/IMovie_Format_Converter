@@ -2,8 +2,8 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-APP_NAME="VideoConverterOsx"
-EXECUTABLE_NAME="VideoConverterOsx"
+APP_NAME="iMovie Format Converter"
+EXECUTABLE_NAME="iMovieFormatConverter"
 PRODUCT_EXECUTABLE="VideoConverterOsxApp"
 DESKTOP_APP="$HOME/Desktop/${APP_NAME}.app"
 BUILD_DIR="$ROOT_DIR/.build/release"
@@ -55,10 +55,12 @@ cat > "$DESKTOP_APP/Contents/Info.plist" <<PLIST
   <key>CFBundleIconFile</key>
   <string>AppIcon</string>
   <key>CFBundleIdentifier</key>
-  <string>com.georgek.videoconverterosx</string>
+  <string>com.georgek.imovieformatconverter</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleName</key>
+  <string>$APP_NAME</string>
+  <key>CFBundleDisplayName</key>
   <string>$APP_NAME</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
