@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/gkaragioul/IMovie_Format_Converter/releases/latest/download/iMovie-Format-Converter.app.zip">Download</a> &bull;
+  <a href="https://github.com/gkaragioul/IMovie_Format_Converter/releases/latest">Download</a> &bull;
   <a href="#building-a-working-app-from-source">Build</a> &bull;
   <a href="#how-to-use-the-app">Usage</a> &bull;
   <a href="#features">Features</a> &bull;
@@ -27,7 +27,7 @@ A native macOS batch converter app that converts dragged-and-dropped media into 
 
 Download the latest macOS app here:
 
-<https://github.com/gkaragioul/IMovie_Format_Converter/releases/latest/download/iMovie-Format-Converter.app.zip>
+<https://github.com/gkaragioul/IMovie_Format_Converter/releases/latest>
 
 ## Building a working app from source
 
