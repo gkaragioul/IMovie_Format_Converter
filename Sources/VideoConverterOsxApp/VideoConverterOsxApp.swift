@@ -396,12 +396,12 @@ struct VideoConverterOsxApp: App {
 
         iMovie Format Converter is open source under the MIT License.
 
-        Media conversion is powered by ffmpeg/ffprobe when available. Those third-party binaries retain their own license terms. See THIRD_PARTY_NOTICES.md in the repository or app bundle resources for details.
+        Media conversion uses ffmpeg/ffprobe installed on the user's Mac. The official app export does not bundle those binaries by default. If you build a custom app with bundled ffmpeg/ffprobe, those third-party binaries retain their own license terms. See THIRD_PARTY_NOTICES.md for details.
         """
 
         NSApplication.shared.orderFrontStandardAboutPanel(options: [
             .applicationName: "iMovie Format Converter",
-            .applicationVersion: "1.0",
+            .applicationVersion: "1.1",
             NSApplication.AboutPanelOptionKey(rawValue: "Copyright"): "Copyright (c) 2026 georgekgr12",
             .credits: NSAttributedString(string: credits)
         ])
