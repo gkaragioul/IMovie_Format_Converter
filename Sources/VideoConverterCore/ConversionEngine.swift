@@ -10,9 +10,9 @@ public enum ConversionError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .ffmpegMissing:
-            return "ffmpeg was not found. Install it with Homebrew (brew install ffmpeg) or bundle ffmpeg inside the app resources."
+            return "ffmpeg was not found. Install it with Homebrew (brew install ffmpeg)."
         case .ffprobeMissing:
-            return "ffprobe was not found. Install it with Homebrew (brew install ffmpeg) or bundle ffprobe inside the app resources."
+            return "ffprobe was not found. Install it with Homebrew (brew install ffmpeg)."
         case .inputFileMissing(let url):
             return "Input file is missing: \(url.path)"
         case .processLaunchFailed(let reason):
@@ -108,7 +108,7 @@ public final class ConversionEngine {
             "-i", inputURL.path,
             "-map", "0:v:0?",
             "-map", "0:a:0?",
-            "-c:v", "libx264",
+            "-c:v", "h264_videotoolbox",
             "-pix_fmt", "yuv420p",
             "-profile:v", "high",
             "-level", "4.1",

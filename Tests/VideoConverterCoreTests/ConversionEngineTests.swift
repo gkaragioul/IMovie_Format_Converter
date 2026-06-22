@@ -56,7 +56,7 @@ final class ConversionEngineTests: XCTestCase {
             "-f", "lavfi",
             "-i", "sine=frequency=1000:sample_rate=48000",
             "-t", "1.2",
-            "-c:v", "libx264",
+            "-c:v", "mpeg4",
             "-pix_fmt", "yuv420p",
             "-c:a", "aac",
             inputURL.path

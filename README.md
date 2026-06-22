@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Native macOS batch conversion for iMovie-ready MOV files.</strong><br>
-  <em>Drag in videos, export H.264 + AAC QuickTime files, powered by ffmpeg.</em>
+  <em>Drag in videos, export H.264 + AAC QuickTime files, powered by user-installed ffmpeg.</em>
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 
 > **This project is no longer maintained.** It was a personal tool that served its purpose and is now archived as open source under the MIT license. No further updates, bug fixes, or support will be provided. That said, the app works - feel free to build it yourself and use it as-is.
 
-A native macOS batch converter app that converts dragged-and-dropped media into an iMovie-friendly format (H.264 + AAC in a `.mov` container). Built with SwiftUI and powered by `ffmpeg`.
+A native macOS batch converter app that converts dragged-and-dropped media into an iMovie-friendly format (H.264 + AAC in a `.mov` container). Built with SwiftUI and powered by user-installed `ffmpeg`.
 
 ## Download
 
@@ -47,7 +47,7 @@ brew install ffmpeg
 
 ### Option 1: Export as a desktop .app bundle (recommended)
 
-This builds a release binary and creates a standalone `iMovie Format Converter.app` on your Desktop, with `ffmpeg` and `ffprobe` bundled inside when they are available on your machine:
+This builds a release binary and creates `iMovie Format Converter.app` on your Desktop. By default, the exported app does **not** bundle `ffmpeg` or `ffprobe`; users install FFmpeg separately, for example with Homebrew.
 
 ```bash
 git clone https://github.com/gkaragioul/IMovie_Format_Converter.git
@@ -57,7 +57,15 @@ chmod +x scripts/export_app.sh scripts/build_icon.sh
 ```
 
 The app will appear at `~/Desktop/iMovie Format Converter.app`. Double-click to launch.
-The export script copies the MIT license, third-party notices, and ffmpeg license/build information into the app bundle resources when ffmpeg is available.
+The export script copies the MIT license and third-party notices into the app bundle resources.
+
+If you intentionally want a self-contained local build, you can opt in to bundling your local FFmpeg binaries:
+
+```bash
+./scripts/export_app.sh --bundle-ffmpeg
+```
+
+Only redistribute a bundled build after reviewing `Contents/Resources/FFmpeg-LICENSE.txt` and `Contents/Resources/FFmpeg-BUILD-CONFIG.txt`. Homebrew FFmpeg builds can be GPL-enabled, including when built with `--enable-gpl` or GPL codecs such as `libx264`.
 
 ### Option 2: Run directly from source
 
@@ -84,7 +92,7 @@ Output files are named `<original>_imovie.mov`.
 | Setting | Value |
 |---------|-------|
 | Container | QuickTime MOV (`.mov`) |
-| Video | H.264 (`libx264`, `yuv420p`, profile high, level 4.1) |
+| Video | H.264 via macOS VideoToolbox (`h264_videotoolbox`, `yuv420p`, profile high, level 4.1) |
 | Audio | AAC stereo at 192k |
 | Atom placement | `+faststart` (streaming-friendly) |
 
@@ -113,7 +121,9 @@ Output files are named `<original>_imovie.mov`.
 
 iMovie Format Converter is released under the [MIT License](LICENSE).
 
-This project does not vendor ffmpeg in source control. The export script can copy locally installed `ffmpeg` and `ffprobe` binaries into the exported `.app` bundle. ffmpeg is a third-party project with its own license terms, typically LGPL-2.1+ or GPL depending on how the binary was built. If you redistribute an exported app bundle, preserve the files generated under `Contents/Resources/` and verify the bundled ffmpeg build's obligations with:
+This project does not vendor ffmpeg in source control, and the default exported app does not bundle `ffmpeg` or `ffprobe`. FFmpeg is a third-party project with its own license terms, typically LGPL-2.1+ or GPL depending on how the binary was built.
+
+If you opt in to `./scripts/export_app.sh --bundle-ffmpeg`, preserve the files generated under `Contents/Resources/` and verify the bundled FFmpeg build's obligations with:
 
 ```bash
 ffmpeg -L
