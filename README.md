@@ -19,7 +19,7 @@
 
 ---
 
-> **This project is no longer maintained.** It was a personal tool that served its purpose and is now archived as open source under the MIT license. No further updates, bug fixes, or support will be provided. That said, the app works - feel free to build it yourself and use it as-is.
+> **This repository is archived and read-only.** iMovie Format Converter was a personal tool that served its purpose and is no longer maintained: no further updates, bug fixes, or support will be provided, and new issues and pull requests are not accepted. The app works - feel free to build it yourself, use it as-is, or fork it under the MIT License.
 
 A native macOS batch converter app that converts dragged-and-dropped media into an iMovie-friendly format (H.264 + AAC in a `.mov` container). Built with SwiftUI and powered by user-installed `ffmpeg`.
 
