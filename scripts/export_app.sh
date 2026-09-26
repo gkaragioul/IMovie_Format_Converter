@@ -31,10 +31,12 @@ if [[ ! -f "$ICON_FILE" ]]; then
   "$ROOT_DIR/scripts/build_icon.sh"
 fi
 
-# Remap the checkout path in compiled paths (#file, debug info) so the release
-# binary does not embed the builder's home directory.
+# Keep the builder's home directory out of the release binary:
+# -file-prefix-map remaps the checkout path in #file strings and debug info, and
+# the linker's -S drops the debug map (absolute source and .o paths).
 swift build -c release --product "$PRODUCT_EXECUTABLE" \
-  -Xswiftc -file-prefix-map -Xswiftc "$ROOT_DIR=."
+  -Xswiftc -file-prefix-map -Xswiftc "$ROOT_DIR=." \
+  -Xlinker -S
 
 rm -rf "$DESKTOP_APP"
 mkdir -p "$DESKTOP_APP/Contents/MacOS"
