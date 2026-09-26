@@ -402,7 +402,7 @@ struct VideoConverterOsxApp: App {
         NSApplication.shared.orderFrontStandardAboutPanel(options: [
             .applicationName: "iMovie Format Converter",
             .applicationVersion: "1.1",
-            NSApplication.AboutPanelOptionKey(rawValue: "Copyright"): "Copyright (c) 2026 georgekgr12",
+            NSApplication.AboutPanelOptionKey(rawValue: "Copyright"): "Copyright (c) 2026 George Karagioules",
             .credits: NSAttributedString(string: credits)
         ])
     }

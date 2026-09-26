@@ -31,7 +31,10 @@ if [[ ! -f "$ICON_FILE" ]]; then
   "$ROOT_DIR/scripts/build_icon.sh"
 fi
 
-swift build -c release --product "$PRODUCT_EXECUTABLE"
+# Remap the checkout path in compiled paths (#file, debug info) so the release
+# binary does not embed the builder's home directory.
+swift build -c release --product "$PRODUCT_EXECUTABLE" \
+  -Xswiftc -file-prefix-map -Xswiftc "$ROOT_DIR=."
 
 rm -rf "$DESKTOP_APP"
 mkdir -p "$DESKTOP_APP/Contents/MacOS"
@@ -92,7 +95,7 @@ cat > "$DESKTOP_APP/Contents/Info.plist" <<PLIST
   <key>LSMinimumSystemVersion</key>
   <string>13.0</string>
   <key>NSHumanReadableCopyright</key>
-  <string>Copyright (c) 2026 georgekgr12</string>
+  <string>Copyright (c) 2026 George Karagioules</string>
   <key>NSPrincipalClass</key>
   <string>NSApplication</string>
 </dict>
