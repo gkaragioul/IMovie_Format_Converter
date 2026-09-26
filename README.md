@@ -117,6 +117,10 @@ Output files are named `<original>_imovie.mov`.
 - `scripts/export_app.sh` - builds and exports the `.app` bundle
 - `scripts/build_icon.sh` - generates the app icon
 
+## Disclaimer
+
+iMovie Format Converter is provided as is, without warranty of any kind, under the [MIT License](LICENSE). Use it at your own risk; you are responsible for how you use it. The app only reads your source files and writes new `_imovie.mov` files to the export folder you choose, but check each converted file before deleting an original. `scripts/export_app.sh` replaces any existing `iMovie Format Converter.app` on your Desktop.
+
 ## License and third-party notices
 
 iMovie Format Converter is released under the [MIT License](LICENSE).
